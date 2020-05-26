@@ -47,6 +47,38 @@
 		</p>
 		
 	</form>
+	<div class="tabla">
+		<table>
+			<tr>
+				<th>Nombre</th>
+				<th>Correo</th>
+			</tr>
+			<?php
+			$consulta="SELECT * FROM alta";
+			$ejecutarConsulta=mysqli_query($enlace, $consulta);
+			$verFilas=mysqli_num_rows($ejecutarConsulta);
+			$fila=mysqli_fetch_array($ejecutarConsulta);
+			if (!$ejecutarConsulta) {
+				echo "Error en la consulta";
+				# code...
+			}else{
+				if ($verFilas<1) {
+					echo "<tr><td>Sin registros</td></tr>";
+				}else{
+					for ($i=0; $i <=$fila ; $i++) { 
+						echo '
+						<tr>
+							<td>'.$fila[1].'</td>
+							<td>'.$fila[0].'</td>
+							
+						</tr>';
+						$fila=mysqli_fetch_array($ejecutarConsulta);
+					}
+				}
+			}
+			?>
+		</table>
+	</div>
 </BODY>
 </HTML>
 <?php
